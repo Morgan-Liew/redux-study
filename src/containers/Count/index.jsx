@@ -39,7 +39,7 @@ import {
   createIncrementAction,
   createDecrementAction,
   createIncAsyncAction,
-} from "../../redux/actions/count_action";
+} from "../../redux/actions/count";
 
 // 引入connect 用于连接UI组件和redux
 import { connect } from "react-redux";
@@ -113,7 +113,7 @@ class Count extends Component {
 
 // 创建并暴露一个Count的容器组件
 export default connect(
-  state => ({ count: state }),
+  state => ({ count: state.he }),
   // mapDispatchToProps 简写
   {
     jia:createIncrementAction,
