@@ -1,70 +1,56 @@
-# Getting Started with Create React App
+## 1.求和案例_redux精简版
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+  (1)去除Count组件自身的状态
+  (2).src 下建立
+       -src 
+         -redux
+           -store.js
+           -count_reducer.js
+  (3).store.js
+       1).引入redux中的createStore函数，创建一个store
+       2).createStore调用时要传入一个为其服务的reducer
+       3).记得暴露store对象
 
-## Available Scripts
+  (4).count_reducer.js
+       1).reducer的本质是一个函数，接收preState，action两个参数，返回加工后的状态
+       2).reducer有两个作用：初始化状态，加工状态
+       3).reducer被第一次调用时，是store自动触发的，传递的preState是undefined
 
-In the project directory, you can run:
+  (5).在index.js中监测store中状态的改变，一旦发生改变重新渲染App
+  备注：redux只负责管理状态，至于状态的改变驱动着页面的展示
 
-### `npm start`
+## 2.求和案例_redux完整版
+   新增文件：
+     1.count_action.js 专门用于创建action对象
+     2.constant.js 放置容易写错的常量，action中的type
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 3.求和案例_redux异步action
+    1.明确：延迟的动作不想交给组件自身，想交给action
+    2.何时需要异步action：想要对状态进行操作，具体数据靠异步返回
+    
+## 4.求和案例_react-redux基本使用
+     1.明确两个概念
+          1）UI组件 ：不能使用任何redux的API，只负责页面的呈现、交互等
+          2）容器组件：负责和redux通信，将结果交给UI组件
+     2.如何创建一个容器组件-靠react-redux的connect函数
+        connect(matStateToProps,mapDispatchToProps)(UI组件)
+          -mapStateToProps : 映射状态，返回值是一个对象
+          -mapDispatchToProps : 映射操作状态的方法，返回值是一个对象
+     3.备注：
+          1.容器组件中的store是靠props传进去的，而不是在容器组件中直接引入的
+          2.mapDispatchToProps ,也可以是一个对象
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 5.求和案例_react-redux优化
+     1.容器组件和UI组件整合一个文件
+     2.无需自己给容器传递store，给App包一个<Provider store={store}>即可
+     3.使用了react-redux后也不用再自己检测redux中状态的改变，容器组件可以自动完成这个工作
+     4.mapDispatchToProps也可以简单的写成一个对象
+     5.一个组件要和redux打交道
+          1.定义好UI组件 --- 不暴露
+          2.引入connect生成一个容器组件，并暴露
+            connect(
+                 state => ({key:value}), // 映射状态
+                 {key:xxxxAction}        // 映射操作状态方法
+            )(UI组件)
+          3.在UI组件中通过this.props.xxxx读取和操作状态
