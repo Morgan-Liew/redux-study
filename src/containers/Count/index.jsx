@@ -33,7 +33,7 @@ export default connect(
 // // 引入Count的UI组件
 // import CountUI from "../../components/Count";
 import React, { Component } from "react";
-
+import './index.css'
 // 引入action
 import {
   createIncrementAction,
@@ -69,31 +69,35 @@ class Count extends Component {
 
   increment = () => {
     const { value } = this.selectNumber;
-    this.props.jia(value*1)
+    this.props.jia(value * 1);
   };
 
   decrement = () => {
     const { value } = this.selectNumber;
-    this.props.jian(value*1)
+    this.props.jian(value * 1);
   };
 
   incrementIfOdd = () => {
     const { value } = this.selectNumber;
-    if(this.props.count % 2 !== 0){
-      this.props.jia(value*1)
+    if (this.props.count % 2 !== 0) {
+      this.props.jia(value * 1);
     }
   };
 
   incrementAsync = () => {
     const { value } = this.selectNumber;
-    this.props.jiaAsync(value*1,500);
+    this.props.jiaAsync(value * 1, 500);
   };
 
   render() {
-    console.log(this.props)
+    console.log(this.props);
     return (
       <div>
-        <h2>the component of Count</h2>
+        <h2>
+          the component of Count,
+          <br />
+          <small className="total">the total of Component Person :{this.props.renshu}</small>
+        </h2>
         <h3>the current sum :{this.props.count}</h3>
         <select ref={(c) => (this.selectNumber = c)}>
           <option value="1">1</option>
@@ -113,12 +117,12 @@ class Count extends Component {
 
 // 创建并暴露一个Count的容器组件
 export default connect(
-  state => ({ count: state.he }),
+  (state) => ({ count: state.he, renshu: state.rens.length }),
   // mapDispatchToProps 简写
   {
-    jia:createIncrementAction,
-    jian:createDecrementAction,
-    jiaAsync:createIncAsyncAction
+    jia: createIncrementAction,
+    jian: createDecrementAction,
+    jiaAsync: createIncAsyncAction,
   }
   // mapDispatchToProps 一般写法
   /* (dispatch) => ({
@@ -134,4 +138,3 @@ export default connect(
     },
   }) */
 )(Count);
-
