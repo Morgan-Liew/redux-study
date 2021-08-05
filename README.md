@@ -42,6 +42,7 @@
 
 
 ## 5.求和案例_react-redux优化
+
      1.容器组件和UI组件整合一个文件
      2.无需自己给容器传递store，给App包一个<Provider store={store}>即可
      3.使用了react-redux后也不用再自己检测redux中状态的改变，容器组件可以自动完成这个工作
@@ -54,3 +55,26 @@
                  {key:xxxxAction}        // 映射操作状态方法
             )(UI组件)
           3.在UI组件中通过this.props.xxxx读取和操作状态
+
+## 6.求和案例_react-redux数据共享版
+
+    1.定义一个Person组件，和Count组件通过redux共享数据
+    2.为Person组件编写：reducer、action，配置constant常量
+    3.重点：Person的reducer和Count的Reducer要使用combineReducers进行合并，合并后的总状态是一个对象
+    4.交给store的是总reducer，最后注意在组件中取出状态的时候，记得取“到位”
+
+## 纯函数
+   1.一类特别的函数，只要是同样的输入(实参)，必定得到同样的输出(返回)
+   2.必须遵守以下一些约束
+      1）不得改写参数数据
+      2）不会产生任何副作用
+      3）不能调用Date.now()或者Math.random()等不纯的方法
+   3.redux的reducer函数必须是一个纯函数
+
+## 安装并使用redux开发者工具
+   1.yarn add redux-devtools-extension
+   2.store中运行配置
+     import {composeWithDevTools} from 'redux-devtools-extendion'
+     const store = createStore(allReducer,composeWithDevTools(applyMiddleware(thunk)))
+
+   
