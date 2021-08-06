@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+// 引入Count Person 容器组件
 import Count from "./containers/Count";
 import Person from "./containers/Person";
 // import store from './redux/store'

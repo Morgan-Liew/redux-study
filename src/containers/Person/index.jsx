@@ -50,7 +50,7 @@ class Person extends Component {
 }
 
 export default connect(
-  (state) => ({ persons: state.rens, sum: state.he }),
+  (state) => ({ persons: state.persons, sum: state.count }),
   // mapDispatchToProps 简写
   {
     addPerson: createAddPersonAction,

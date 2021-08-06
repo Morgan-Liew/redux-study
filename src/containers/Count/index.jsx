@@ -96,7 +96,7 @@ class Count extends Component {
         <h2>
           the component of Count,
           <br />
-          <small className="total">the total of Component Person :{this.props.renshu}</small>
+          <small className="total">the total of Component Person :{this.props.persons}</small>
         </h2>
         <h3>the current sum :{this.props.count}</h3>
         <select ref={(c) => (this.selectNumber = c)}>
@@ -117,7 +117,7 @@ class Count extends Component {
 
 // 创建并暴露一个Count的容器组件
 export default connect(
-  (state) => ({ count: state.he, renshu: state.rens.length }),
+  (state) => ({ count: state.count, persons: state.persons.length }),
   // mapDispatchToProps 简写
   {
     jia: createIncrementAction,
