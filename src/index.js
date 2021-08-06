@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 const root = document.getElementById("root");
 
 ReactDOM.render(
+  /* 此处需要用Provider包裹App，目的让App所有后代容器组件都能接收到store */
   <Provider store={store}>
     <App />
   </Provider>,
