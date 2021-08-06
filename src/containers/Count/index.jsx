@@ -36,9 +36,9 @@ import React, { Component } from "react";
 import './index.css'
 // 引入action
 import {
-  createIncrementAction,
-  createDecrementAction,
-  createIncAsyncAction,
+  increment,
+  decrement,
+  incrementAsync,
 } from "../../redux/actions/count";
 
 // 引入connect 用于连接UI组件和redux
@@ -69,24 +69,24 @@ class Count extends Component {
 
   increment = () => {
     const { value } = this.selectNumber;
-    this.props.jia(value * 1);
+    this.props.increment(value * 1);
   };
 
   decrement = () => {
     const { value } = this.selectNumber;
-    this.props.jian(value * 1);
+    this.props.decrement(value * 1);
   };
 
   incrementIfOdd = () => {
     const { value } = this.selectNumber;
     if (this.props.count % 2 !== 0) {
-      this.props.jia(value * 1);
+      this.props.increment(value * 1);
     }
   };
 
   incrementAsync = () => {
     const { value } = this.selectNumber;
-    this.props.jiaAsync(value * 1, 500);
+    this.props.incrementAsync(value * 1, 500);
   };
 
   render() {
@@ -120,9 +120,9 @@ export default connect(
   (state) => ({ count: state.count, persons: state.persons.length }),
   // mapDispatchToProps 简写
   {
-    jia: createIncrementAction,
-    jian: createDecrementAction,
-    jiaAsync: createIncAsyncAction,
+    increment,
+    decrement,
+    incrementAsync,
   }
   // mapDispatchToProps 一般写法
   /* (dispatch) => ({

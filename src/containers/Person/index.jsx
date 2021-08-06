@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { nanoid } from "nanoid";
-import { createAddPersonAction } from "../../redux/actions/person";
+import { addPerson } from "../../redux/actions/person";
 import { connect } from "react-redux";
-import './index.css'
+import "./index.css";
 
 class Person extends Component {
   addPerson = () => {
@@ -16,24 +16,28 @@ class Person extends Component {
   };
 
   render() {
-    console.log(this.props)
+    console.log(this.props);
     return (
       <div>
         <h2>
           the component of Person,
           <br />
-          <small className="sum">the sum of Component Count : {this.props.sum}</small>
+          <small className="sum">
+            the sum of Component Count : {this.props.sum}
+          </small>
         </h2>
         <input
           ref={(c) => (this.nameNode = c)}
           type="text"
           placeholder="输入名字"
         />
+        &nbsp;&nbsp;
         <input
           ref={(c) => (this.ageNode = c)}
           type="text"
           placeholder="输入年龄"
         />
+        &nbsp;&nbsp;
         <button onClick={this.addPerson}>添加</button>
         <ol>
           {this.props.persons.map((p) => {
@@ -53,6 +57,6 @@ export default connect(
   (state) => ({ persons: state.persons, sum: state.count }),
   // mapDispatchToProps 简写
   {
-    addPerson: createAddPersonAction,
+    addPerson,
   }
 )(Person);

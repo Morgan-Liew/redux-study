@@ -63,6 +63,10 @@
     3.重点：Person的reducer和Count的Reducer要使用combineReducers进行合并，合并后的总状态是一个对象
     4.交给store的是总reducer，最后注意在组件中取出状态的时候，记得取“到位”
 
+## 7.求和案例_react-redux最终版
+   1.所有变量名字规范命名，尽量触发对象简写形式
+   2.reducers 文件夹中，编写index.js专门用于汇总并暴露所有的reducer
+
 ## 纯函数
    1.一类特别的函数，只要是同样的输入(实参)，必定得到同样的输出(返回)
    2.必须遵守以下一些约束

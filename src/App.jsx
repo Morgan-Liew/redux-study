@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-// 引入Count Person 容器组件
-import Count from "./containers/Count";
-import Person from "./containers/Person";
+
+import Count from "./containers/Count";  // 引入Count的容器组件
+import Person from "./containers/Person"; // 引入Person的容器组件
+
 // import store from './redux/store'
 
 export default class App extends Component {
